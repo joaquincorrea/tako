@@ -10,43 +10,35 @@ a workflow engine and a common data format between stages, one stage's output ca
 *i.e.* A workflow that requires the sequence **image alignment>correction>segmentation>visualization** can be written 
 in `tako` like this:
 
-- `examples/big_workflow.py`
-- `# Import tako.arms`
+  - `examples/big_workflow.py`
 
-`from tako.arms.alignment import Alignment`
-`from tako.arms.correction import Correction`
+    `from tako.arms.alignment import Alignment`
+    
+    `from tako.arms.correction import Correction`
+    
+    `from tako.arms.segmentation import Segmentation`
+    
+    `from tako.arms.visualization import Visualization`
+    
+    `from tako.head import head`
 
-`from tako.arms.segmentation import Segmentation`
 
-`from tako.arms.visualization import Visualization`
-
-`from tako.head import head`
-
-
-- Define each stage with a dictiorary `setup`
-
-- `# Alignment block`
-
-`alignment = Alignment(setup={"algorithm": "sift","data": "examples/data/data.raw","params": {"fnum": 10,"sigma": 0.001}})`
-
-- `# Correction block`
-
-`correction = Correction(setup={"algorithm": "drift-correction","data": alignment.output(),"params": {"elastic": -0.2})`
-               
-- `# Segmentation block`
-
-`segmentation = Segmentation(setup = {"algorithm": "mean-shift","data": correction.output(),"params": {"sigma": 0.1,"epsilon": 0.01}})`
-                       
-
-- `# Visualization block`
-
-`visualization = Visualization(setup = {"algorithm": "3d-render", "data": segmentation.output(),"params": {"res": 100})`
-
-               
-
-- `# Execution block`
-
-`head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])`
+  - Define each stage with a dictiorary `setup`
+  
+    `# Alignment block`
+    `alignment = Alignment(setup={"algorithm": "sift","data": "examples/data/data.raw","params": {"fnum": 10,"sigma": 0.001}})`
+    
+    `# Correction block`
+    `correction = Correction(setup={"algorithm": "drift-correction","data": alignment.output(),"params": {"elastic": -0.2})`
+                           
+    `# Segmentation block`
+    `segmentation = Segmentation(setup = {"algorithm": "mean-shift","data": correction.output(),"params": {"sigma": 0.1,"epsilon": 0.01}})`
+                           
+    `# Visualization block`
+    `visualization = Visualization(setup = {"algorithm": "3d-render", "data": segmentation.output(),"params": {"res": 100})`
+    
+    `# Execution block`
+    `head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])`
     
 
 Architecture
