@@ -6,7 +6,7 @@ from tako.util import tigres
 
 class Reconstruction:
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.algorithm = {}
         self.data = {}
         self.params = {}

@@ -16,24 +16,21 @@ alignment = Alignment(setup={"algorithm": "method1",
                               "dos": 2}})
 
 # Correction block
-correction = Correction
-correction.setup = {"algorithm": "",
+correction = Correction(setup = {"algorithm": "",
                    "data": alignment.output(),
                    "params": {"uno": 1,
-                              "dos": 2}}
+                              "dos": 2}})
 
 # Segmentation block
-segmentation = Segmentation
-segmentation.setup = {"algorithm": "",
+segmentation = Segmentation(setup = {"algorithm": "",
                    "data": correction.output(),
                    "params": {"uno": 1,
-                              "dos": 2}}
+                              "dos": 2}})
 
 # Visualization block
-visualization = Visualization
-visualization.setup = {"algorithm": "",
+visualization = Visualization(setup = {"algorithm": "",
                    "data": segmentation.output(),
                    "params": {"uno": 1,
-                              "dos": 2}}
+                              "dos": 2}})
 
-head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
+head.do_workflow(inputs=[alignment, correction, segmentation, visualization])

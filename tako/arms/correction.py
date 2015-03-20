@@ -5,7 +5,7 @@ from tako.util import tigres
 
 class Correction:
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.algorithm = {}
         self.data = {}
         self.params = {}

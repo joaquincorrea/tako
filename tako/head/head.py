@@ -5,8 +5,8 @@ from tako.util import tigres
 class do_workflow(object):
 
     def __init__(self, *args, **kwargs):
-        inputs = kwargs.get("inputs")
-        self.inputs = inputs
+        setup = kwargs.get("inputs")
+        self.inputs = setup
         self.tasks = self.task_gen()
         # self.function_name = function_name
         # return inputs
