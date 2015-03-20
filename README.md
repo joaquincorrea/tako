@@ -11,8 +11,7 @@ a workflow engine and a common data format between stages, one stage's output ca
 in `tako` like this:
 
   - `examples/big_workflow.py`
-  - 
-```
+  - ```
 #!python
 
 # Import tako.arms
@@ -22,7 +21,6 @@ in `tako` like this:
     from tako.arms.visualization import Visualization
     from tako.head import head
 ```
-
 
   - Define each stage with a dictiorary `setup`
     
