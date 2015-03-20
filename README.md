@@ -20,7 +20,7 @@ in `tako` like this:
     from tako.arms.segmentation import Segmentation
     from tako.arms.visualization import Visualization
     from tako.head import head
-    ```
+```
   - Define each stage with a dictiorary `setup`
     
     - 
