@@ -11,35 +11,46 @@ a workflow engine and a common data format between stages, one stage's output ca
 in `tako` like this:
 
   - `examples/big_workflow.py`
-
-    `from tako.arms.alignment import Alignment`
-    
-    `from tako.arms.correction import Correction`
-    
-    `from tako.arms.segmentation import Segmentation`
-    
-    `from tako.arms.visualization import Visualization`
-    
-    `from tako.head import head`
-
-
+  - ```python
+    # Import tako.arms
+    from tako.arms.alignment import Alignment
+    from tako.arms.correction import Correction
+    from tako.arms.segmentation import Segmentation
+    from tako.arms.visualization import Visualization
+    from tako.head import head
+    ```
   - Define each stage with a dictiorary `setup`
-  
-    `# Alignment block`
-    `alignment = Alignment(setup={"algorithm": "sift","data": "examples/data/data.raw","params": {"fnum": 10,"sigma": 0.001}})`
     
-    `# Correction block`
-    `correction = Correction(setup={"algorithm": "drift-correction","data": alignment.output(),"params": {"elastic": -0.2})`
-                           
-    `# Segmentation block`
-    `segmentation = Segmentation(setup = {"algorithm": "mean-shift","data": correction.output(),"params": {"sigma": 0.1,"epsilon": 0.01}})`
-                           
-    `# Visualization block`
-    `visualization = Visualization(setup = {"algorithm": "3d-render", "data": segmentation.output(),"params": {"res": 100})`
-    
-    `# Execution block`
-    `head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])`
-    
+    - ```python
+    # Alignment block
+    alignment = Alignment(setup={"algorithm": "sift",
+                   "data": "examples/data/data.raw",
+                   "params": {"fnum": 10,
+                              "sigma": 0.001}})```
+    - ```python
+    # Correction block
+    correction = Correction
+    correction.setup = {setup={"algorithm": "drift-correction",
+                       "data": alignment.output(),
+                       "params": {"elastic": -0.2}```
+    - ```python
+    # Segmentation block
+    segmentation = Segmentation
+    segmentation.setup = {"algorithm": "mean-shift",
+                       "data": correction.output(),
+                       "params": {"sigma": 0.1,
+                                  "epsilon": 0.01}}```
+
+    - ```python
+    # Visualization block
+    visualization = Visualization
+    visualization.setup = {"algorithm": "3d-render",
+                       "data": segmentation.output(),
+                       "params": {"res": 100}```
+    - ```python
+    # Execution block
+    head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
+    ```
 
 Architecture
 ---
