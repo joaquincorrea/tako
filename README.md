@@ -11,7 +11,6 @@ a workflow engine and a common data format between stages, one stage's output ca
 in `tako` like this:
 
   - `examples/big_workflow.py`
-  - 
 ```
 #!python
     # Import tako.arms
@@ -21,9 +20,8 @@ in `tako` like this:
     from tako.arms.visualization import Visualization
     from tako.head import head
 ```
+
   - Define each stage with a dictiorary `setup`
-    
-    - 
 ```
 #!python
     # Alignment block
@@ -32,6 +30,7 @@ in `tako` like this:
                    "params": {"fnum": 10,
                               "sigma": 0.001}})
 ```
+
 ```
 #!python
     # Correction block
@@ -40,6 +39,7 @@ in `tako` like this:
                        "data": alignment.output(),
                        "params": {"elastic": -0.2}
 ```
+
 ```
 #!python
     # Segmentation block
@@ -49,6 +49,7 @@ in `tako` like this:
                        "params": {"sigma": 0.1,
                                   "epsilon": 0.01}}
 ```
+
 ```
 #!python
     # Visualization block
@@ -57,6 +58,7 @@ in `tako` like this:
                        "data": segmentation.output(),
                        "params": {"res": 100}
 ```
+
 ```
 #!python
     # Execution block
