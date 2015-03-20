@@ -11,7 +11,9 @@ a workflow engine and a common data format between stages, one stage's output ca
 in `tako` like this:
 
   - `examples/big_workflow.py`
-  - ```#!python
+  - 
+```
+#!python
     # Import tako.arms
     from tako.arms.alignment import Alignment
     from tako.arms.correction import Correction
@@ -21,19 +23,25 @@ in `tako` like this:
     ```
   - Define each stage with a dictiorary `setup`
     
-    - ```#!python
+    - 
+```
+#!python
     # Alignment block
     alignment = Alignment(setup={"algorithm": "sift",
                    "data": "examples/data/data.raw",
                    "params": {"fnum": 10,
                               "sigma": 0.001}})```
-    - ```#!python
+    - 
+```
+#!python
     # Correction block
     correction = Correction
     correction.setup = {setup={"algorithm": "drift-correction",
                        "data": alignment.output(),
                        "params": {"elastic": -0.2}```
-    - ```#!python
+    - 
+```
+#!python
     # Segmentation block
     segmentation = Segmentation
     segmentation.setup = {"algorithm": "mean-shift",
@@ -41,13 +49,17 @@ in `tako` like this:
                        "params": {"sigma": 0.1,
                                   "epsilon": 0.01}}```
 
-    - ```#!python
+    - 
+```
+#!python
     # Visualization block
     visualization = Visualization
     visualization.setup = {"algorithm": "3d-render",
                        "data": segmentation.output(),
                        "params": {"res": 100}```
-    - ```#!python
+    - 
+```
+#!python
     # Execution block
     head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
     ```
