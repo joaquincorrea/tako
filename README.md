@@ -11,14 +11,19 @@ a workflow engine and a common data format between stages, one stage's output ca
 in `tako` like this:
 
   - `examples/big_workflow.py`
-  - ```python
-    # Import tako.arms
+  - 
+```
+#!python
+
+# Import tako.arms
     from tako.arms.alignment import Alignment
     from tako.arms.correction import Correction
     from tako.arms.segmentation import Segmentation
     from tako.arms.visualization import Visualization
     from tako.head import head
-    ```
+```
+
+
   - Define each stage with a dictiorary `setup`
     
     - ```python
