@@ -1,0 +1,10 @@
+#!/usr/common/usg/python/2.7.5/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'tigres==0.1.1-rc2','console_scripts','tigres-log'
+__requires__ = 'tigres==0.1.1-rc2'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('tigres==0.1.1-rc2', 'console_scripts', 'tigres-log')()
+    )
