@@ -30,16 +30,16 @@ in `tako` like this:
     alignment = Alignment(setup={"algorithm": "sift",
                    "data": "examples/data/data.raw",
                    "params": {"fnum": 10,
-                              "sigma": 0.001}})```
-    - 
+                              "sigma": 0.001}})
+```
 ```
 #!python
     # Correction block
     correction = Correction
     correction.setup = {setup={"algorithm": "drift-correction",
                        "data": alignment.output(),
-                       "params": {"elastic": -0.2}```
-    - 
+                       "params": {"elastic": -0.2}
+```
 ```
 #!python
     # Segmentation block
@@ -47,22 +47,21 @@ in `tako` like this:
     segmentation.setup = {"algorithm": "mean-shift",
                        "data": correction.output(),
                        "params": {"sigma": 0.1,
-                                  "epsilon": 0.01}}```
-
-    - 
+                                  "epsilon": 0.01}}
+```
 ```
 #!python
     # Visualization block
     visualization = Visualization
     visualization.setup = {"algorithm": "3d-render",
                        "data": segmentation.output(),
-                       "params": {"res": 100}```
-    - 
+                       "params": {"res": 100}
+```
 ```
 #!python
     # Execution block
     head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
-    ```
+```
 
 Architecture
 ---
