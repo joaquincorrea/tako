@@ -67,24 +67,26 @@ in `tako` like this:
 
 Tako and ImageJ
 ---
-Tako is also capable of running ImageJ macros or plugins as a batch job
+Tako is also capable of running ImageJ macros or plugins as a batch ImageJ execution
 
 *i.e.*
 ```
+  - Tako example
 #!python
     # examples/imagej_macro.py
     from tako.arms.correction import Correction
     from tako.head import head
     
     alignment = Correction(setup={"algorithm": "ijmacro",
-                       "data": "/Users/DOE6903584/NERSC/tako/examples/data/Lenna.png",
-                       "params": {'macro': "/Users/DOE6903584/NERSC/tako/bin/correction/image-macro.ijm"}
+                       "data": "examples/data/Lenna.png",
+                       "params": {'macro': "tako/bin/correction/image-macro.ijm"}
                        }
                           )
     
     do = head.do_workflow(setup=[alignment])
 ```
 
+  - ImageJ macro
 ```
 #!java
     // bin/correction/image-macro.ijm
