@@ -65,6 +65,43 @@ in `tako` like this:
     head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
 ```
 
+Tako and ImageJ
+---
+Tako is also capable of running ImageJ macros or plugins as a batch job
+
+*i.e.*
+```
+#!python
+    # examples/imagej_macro.py
+    from tako.arms.correction import Correction
+    from tako.head import head
+    
+    alignment = Correction(setup={"algorithm": "ijmacro",
+                       "data": "/Users/DOE6903584/NERSC/tako/examples/data/Lenna.png",
+                       "params": {'macro': "/Users/DOE6903584/NERSC/tako/bin/correction/image-macro.ijm"}
+                       }
+                          )
+    
+    do = head.do_workflow(setup=[alignment])
+```
+
+```
+#!java
+    // bin/correction/image-macro.ijm
+    args = getArgument;
+    args = split(args,":")
+    
+    img=args[0]
+    output=args[1]
+    
+    setBatchMode(true);
+    open(img);
+    
+    run("Find Edges");
+    saveAs("Tiff", output);
+    close();
+```
+
 Architecture
 ---
 タコ (Tako) has two main components, `tako.arms` where the workflows are templated, and `tako.head` where the workflow engine [[Tigres]] manages arm assignments.

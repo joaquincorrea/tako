@@ -11,7 +11,10 @@ from tako.head import head
 # Alignment block
 alignment = Alignment(setup={"algorithm": "method1",
                    "data": "/Users/DOE6903584/NERSC/tako/examples/data/Lenna.png",
-                   "params": ["--headless", "-macro", "/Users/DOE6903584/NERSC/tako/bin/alignment/image-macro.ijm"]})
+                   "params": {'macro': "/Users/DOE6903584/NERSC/tako/bin/alignment/image-macro.ijm"}
+                   # "params": ["--headless", "-macro", "/Users/DOE6903584/NERSC/tako/bin/alignment/image-macro.ijm"]})
+                   }
+                      )
 
 do = head.do_workflow(setup=[alignment])
 
