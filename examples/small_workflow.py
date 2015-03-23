@@ -13,4 +13,8 @@ alignment = Alignment(setup={"algorithm": "method1",
                    "data": "/Users/DOE6903584/NERSC/tako/examples/data/Lenna.png",
                    "params": ["--headless", "-macro", "/Users/DOE6903584/NERSC/tako/bin/alignment/image-macro.ijm"]})
 
-head.do_workflow(setup={alignment})
+do = head.do_workflow(setup=[alignment])
+
+# do = head.do_workflow()
+#uuuuu
+# head.do_workflow(alignment)
