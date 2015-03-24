@@ -71,9 +71,9 @@ Tako also allows you to integrate ImageJ macros and plugins into your workflows.
 
 *i.e.* Edge detection using ImageJ's `run("Find Edges");` method. 
 
+`examples/imagej_macro.py`
 ```
 #!python
-    # examples/imagej_macro.py
     from tako.arms.correction import Correction
     from tako.head import head
     
@@ -85,9 +85,9 @@ Tako also allows you to integrate ImageJ macros and plugins into your workflows.
     do = head.do_workflow(setup=[correction])
 ```
 
+`bin/correction/imagej-macro_template.ijm`
 ```
 #!java
-    // bin/correction/imagej-macro_template.ijm
     args = getArgument;
     args = split(args,":");
 
