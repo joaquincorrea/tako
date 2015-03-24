@@ -5,7 +5,7 @@ from tako.head import head
 
 alignment = Correction(setup={"algorithm": "ijmacro",
                    "data": "/Users/DOE6903584/NERSC/tako/examples/data/Lenna.png",
-                   "params": {'macro': "/Users/DOE6903584/NERSC/tako/bin/correction/image-macro.ijm"}
+                   "params": {'macro': "/Users/DOE6903584/NERSC/tako/bin/correction/imagej-macro.ijm"}
                    }
                       )
 

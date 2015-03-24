@@ -67,39 +67,40 @@ in `tako` like this:
 
 Tako and ImageJ
 ---
-Tako is also capable of running ImageJ macros or plugins as a batch ImageJ execution
+Tako also allows you to integrate ImageJ macros and plugins into your workflows.
 
-*i.e.*
+*i.e.* Edge detection using ImageJ's `run("Find Edges");` method. 
+
 ```
-  - Tako example
 #!python
     # examples/imagej_macro.py
     from tako.arms.correction import Correction
     from tako.head import head
     
-    alignment = Correction(setup={"algorithm": "ijmacro",
+    correction = Correction(setup={"algorithm": "ijmacro",
                        "data": "examples/data/Lenna.png",
-                       "params": {'macro': "tako/bin/correction/image-macro.ijm"}
-                       }
-                          )
+                       "params": {'macro': "tako/bin/correction/imagej-macro.ijm"}
+                       })
     
-    do = head.do_workflow(setup=[alignment])
+    do = head.do_workflow(setup=[correction])
 ```
 
-  - ImageJ macro
 ```
 #!java
-    // bin/correction/image-macro.ijm
+    // bin/correction/imagej-macro_template.ijm
     args = getArgument;
-    args = split(args,":")
-    
-    img=args[0]
-    output=args[1]
+    args = split(args,":");
+
+    img=args[0];
+    output=args[1];
     
     setBatchMode(true);
     open(img);
     
+    // START ImageJ macro
     run("Find Edges");
+    // END ImageJ macro
+    
     saveAs("Tiff", output);
     close();
 ```
