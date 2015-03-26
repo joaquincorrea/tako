@@ -9,7 +9,8 @@ class Correction:
         self.setup = setup
         self.algorithm = setup['algorithm']
         self.data = setup['data']
-        self.output = "%s.tiff" % setup['data']
+        # self.output = "%s.tiff" % setup['data']
+        self.output = setup['output']
         self.params = setup['params']
         self.method = self.methods()
         self.task = tigres.Task(self.algorithm, tigres.EXECUTABLE, self.method['bin'])

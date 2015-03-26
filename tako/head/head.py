@@ -4,17 +4,40 @@ from tako.util import tigres
 # from tako.arms.alignment import Alignment
 import ipdb
 
+
+
+
 class do_workflow:
 
     def __init__(self, *args, **kwargs):
-        setup = kwargs.get('setup')
-        self.setup = setup
+        tasks = kwargs.get('setup')
+        self.tasks = tasks
 
-        Task = setup[0].task
-        Input = setup[0].input
+        # setup[0].task
+        # setup[0].input
+        self.Tasks = []
+        self.Inputs = []
+
+        for task in tasks:
+            # self.Tasks.append(self.get_task(task))
+            # self.Inputs.append(self.get_inputs(task))
+            self.Tasks.append(task.task)
+            self.Inputs.append(task.input)
+
+
         # ipdb.set_trace()
-        tigres.sequence("", tigres.TaskArray("", [Task]), tigres.InputArray("",[Input]))
+        tigres.sequence("", tigres.TaskArray("", self.Tasks), tigres.InputArray("",self.Inputs))
         # print(type(self.setup))
+
+
+    def get_task(task):
+        return task.task
+
+
+    def get_inputs(task):
+        return task.input
+
+
 
         # self.tasks = self.task_gen()
         # ipdb.set_trace()
