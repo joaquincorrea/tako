@@ -15,7 +15,6 @@ alignment = Correction(setup={"algorithm": "ijmacro",
                    }
                       )
 
-
 segmentation = Correction(setup={"algorithm": "ijmacro",
                    "data": alignment.output,
                    "output":"/Users/DOE6903584/NERSC/tako/examples/demo/myxo-small_seg.tif",
@@ -30,4 +29,4 @@ visualization = Correction(setup={"algorithm": "ijmacro",
                    }
                       )
 
-do = head.do_workflow(setup=[alignment, [segmentation]])
+do = head.do_workflow(setup=[alignment, segmentation, visualization])
