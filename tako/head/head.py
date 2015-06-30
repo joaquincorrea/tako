@@ -4,9 +4,6 @@ from tako.util import tigres
 # from tako.arms.alignment import Alignment
 import ipdb
 
-
-
-
 class do_workflow:
 
     def __init__(self, *args, **kwargs):
