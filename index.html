@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tako by jjcorreao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Tako</h1>
+      <h2 class="project-tagline">タコ (Tako) is a image processing workflow engine for high-performance computing</h2>
+      <a href="https://github.com/jjcorreao/tako" class="btn">View on GitHub</a>
+      <a href="https://github.com/jjcorreao/tako/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jjcorreao/tako/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="タコ-tako" class="anchor" href="#%E3%82%BF%E3%82%B3-tako" aria-hidden="true"><span class="octicon octicon-link"></span></a>タコ (Tako)</h1>
+
+<p>Tako is a image processing workflow engine for high-performance computing</p>
+
+<h2>
+<a id="what-it-does" class="anchor" href="#what-it-does" aria-hidden="true"><span class="octicon octicon-link"></span></a>What it does!</h2>
+
+<p>Tako reduces the complexity of high-performance image processing by abstracting the software-stack and the data-management layer, allowing complex workflows to happen with very little effort involved. This is possible by having 
+a workflow engine and a common data format between stages, one stage's output can be the next stage's input.</p>
+
+<p><em>i.e.</em> A workflow that requires the sequence <strong>image alignment&gt;correction&gt;segmentation&gt;visualization</strong> can be written 
+in <code>tako</code> like this:</p>
+
+<ul>
+<li><code>examples/big_workflow.py</code></li>
+</ul>
+
+<pre><code>#!python
+    # Import tako.arms
+    from tako.arms.alignment import Alignment
+    from tako.arms.correction import Correction
+    from tako.arms.segmentation import Segmentation
+    from tako.arms.visualization import Visualization
+    from tako.head import head
+</code></pre>
+
+<ul>
+<li>Define each stage with a dictionary <code>setup</code>
+</li>
+</ul>
+
+<pre><code>#!python
+    # Alignment block
+    alignment = Alignment(setup={"algorithm": "sift",
+                   "data": "examples/data/data.raw",
+                   "params": {"fnum": 10,
+                              "sigma": 0.001}})
+</code></pre>
+
+<pre><code>#!python
+    # Correction block
+    correction = Correction(setup = {setup={"algorithm": "drift-correction",
+                       "data": alignment.output(),
+                       "params": {"elastic": -0.2})
+</code></pre>
+
+<pre><code>#!python
+    # Segmentation block
+    segmentation = Segmentation(setup = {"algorithm": "mean-shift",
+                       "data": correction.output(),
+                       "params": {"sigma": 0.1,
+                                  "epsilon": 0.01}})
+</code></pre>
+
+<pre><code>#!python
+    # Visualization block
+    visualization = Visualization(setup = {"algorithm": "3d-render",
+                       "data": segmentation.output(),
+                       "params": {"res": 100})
+</code></pre>
+
+<pre><code>#!python
+    # Execution block
+    head.do_workflow.inputs(inputs=[alignment, correction, segmentation, visualization])
+</code></pre>
+
+<h2>
+<a id="tako-and-imagej" class="anchor" href="#tako-and-imagej" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tako and ImageJ</h2>
+
+<p>Tako also allows you to integrate ImageJ macros and plugins into your workflows.</p>
+
+<p><em>i.e.</em> Edge detection using ImageJ's <code>run("Find Edges");</code> method. </p>
+
+<p><code>examples/imagej_macro.py</code></p>
+
+<pre><code>#!python
+    from tako.arms.correction import Correction
+    from tako.head import head
+
+    correction = Correction(setup={"algorithm": "ijmacro",
+                       "data": "examples/data/Lenna.png",
+                       "params": {'macro': "tako/bin/correction/imagej-macro.ijm"}
+                       })
+
+    do = head.do_workflow(setup=[correction])
+</code></pre>
+
+<p><code>bin/correction/imagej-macro_template.ijm</code></p>
+
+<pre><code>#!java
+    args = getArgument;
+    args = split(args,":");
+
+    img=args[0];
+    output=args[1];
+
+    setBatchMode(true);
+    open(img);
+
+    // START ImageJ macro
+    run("Find Edges");
+    // END ImageJ macro
+
+    saveAs("Tiff", output);
+    close();
+</code></pre>
+
+<h2>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+
+<p>タコ (Tako) has two main components, <code>tako.arms</code> where the workflows are templated, and <code>tako.head</code> where the workflow engine [[Tigres]] manages arm assignments.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>Joaquin Correa</li>
+<li>Tigres team</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jjcorreao/tako">Tako</a> is maintained by <a href="https://github.com/jjcorreao">jjcorreao</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
