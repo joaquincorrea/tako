@@ -3,6 +3,11 @@
 ===
 Tako is a image processing workflow engine for high-performance computing
 
+Dev version
+===
+This branch is under active development and is not stable, current efforts are focused on changing the 
+workflow engine from `Tigres` to `Airflow` and some improvements for `ImageJ2`.
+
 What it does!
 ---
 Tako reduces the complexity of high-performance image processing by abstracting the software-stack and the data-management layer, allowing complex workflows to happen with very little effort involved. This is possible by having 
